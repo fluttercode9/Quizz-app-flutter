@@ -20,33 +20,35 @@ class _MyAppState extends State<MyApp> {
     {
       'question': 'Whats your fav color?',
       'answers': [
-        'yellow',
-        'black',
-        ' blue',
-        'orange',
+        {'text': 'yellow', 'score': 10},
+        {'text': 'black', 'score': 5},
+        {'text': 'blue', 'score': 0},
+        {'text': 'orange', 'score': 15},
       ]
     },
     {
       'question': 'how old are u?',
       'answers': [
-        '10-20',
-        '20-35',
-        ' 35-50',
-        '50+',
+        {'text': '10-20', 'score': 10},
+        {'text': '20-35', 'score': 50},
+        {'text': ' 35-50', 'score': 5},
+        {'text': '50+', 'score': 1},
       ]
     },
     {
       'question': 'cat or dog?',
       'answers': [
-        'cat',
-        'dog',
+        {'text': 'cat', 'score': 50},
+        {'text': 'dog', 'score': 0},
       ]
     }
   ];
-  int _questionIndex = 0;
-  void _answerQuestion() {
+  var _questionIndex = 0;
+  var _totalScore = 0;
+  void _answerQuestion(int score) {
     setState(() {
       _questionIndex += 1;
+      _totalScore += score;
     });
     if (_questionIndex < _questions.length) {
       print('We have more questions');
@@ -65,7 +67,9 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(
+                totalScore: _totalScore,
+              ),
       ),
     );
   }

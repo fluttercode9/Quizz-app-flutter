@@ -23,8 +23,9 @@ class Quiz extends StatelessWidget {
           questions[questionIndex]['question'],
         ),
         // ...[Answer(_answerQuestion,'a'),   children jest jako lista a my tutaj rozlozylismy te elementy zeby byly czescia TEJ listy :) ez
-        ...(questions[questionIndex]['answers'] as List<String>)
-            .map((answer) => Answer(answerQuestion, answer))
+        ...(questions[questionIndex]['answers'] as List<Map<String, Object>>)
+            .map((answer) =>
+                Answer(() => answerQuestion(answer['score']), answer['text']))
       ],
     );
   }
